@@ -8,20 +8,24 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "^1.0",
-        "doctrine/doctrine-bundle": "^2.8",
-        "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.14",
+        "fzaninotto/faker": "^1.5",
+        "google/cloud-firestore": "^1.27",
+        "imagine/imagine": "^1.2",
+        "kreait/firebase-bundle": "^5.0",
+        "kreait/firebase-php": "^7.0",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.16",
         "sensio/framework-extra-bundle": "^6.1",
         "symfony/asset": "6.2.*",
         "symfony/console": "6.2.*",
         "symfony/doctrine-messenger": "6.2.*",
+        "symfony/dom-crawler": "6.2.*",
         "symfony/dotenv": "6.2.*",
         "symfony/expression-language": "6.2.*",
         "symfony/flex": "^2",
         "symfony/form": "6.2.*",
         "symfony/framework-bundle": "6.2.*",
+        "symfony/html-sanitizer": "6.2.*",
         "symfony/http-client": "6.2.*",
         "symfony/intl": "6.2.*",
         "symfony/mailer": "6.2.*",
@@ -53,7 +57,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/App",
+            "OneShot\\": "src/OneShot"
         }
     },
     "autoload-dev": {

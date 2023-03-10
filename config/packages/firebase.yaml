@@ -1,0 +1,13 @@
+kreait_firebase:
+    projects:
+        oneshot:
+            credentials: '%kernel.project_dir%/config/oneshot-62f66-743583c79389.json'
+            default: false 
+            public: true
+            database_uri: 'https://oneshot-63f66.firebaseio.com'
+            #tenant_id: 'tenant-id'
+            default_dynamic_links_domain: 'https://oneshot-62f66.page.link'
+            verifier_cache: null # Example: cache.app
+            auth_token_cache: null # Example: cache.app
+            http_request_logger:  null # Example: monolog.logger.firebase
+            http_request_debug_logger: null # Example: monolog.logger.firebase_debug

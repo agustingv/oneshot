@@ -1,19 +1,114 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html> <!--<![endif]-->
+<head>
+    <link rel="icon" id="favicon" href="/img/icon/favicon.svg?v=0.1"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+	{% block info_head %}
+    	<meta name="description" content="One Shot">
+    	<meta name="author" content="">
+    	<title>One Shot</title>
+    {% endblock %}
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+    <link href="/css/custom.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	<link href="/js/chosen/chosen.min.css" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.min.css" rel="stylesheet">
+	
+	{% block css %} {% endblock %}
+	<!--[if IE 9]>
+		<script src="/js/PIE_IE9.js"></script>
+	<![endif]-->
+	<!--[if lt IE 9]>
+		<script src="/js/PIE_IE678.js"></script>
+	<![endif]-->
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+	<!--[if lt IE 9]>
+		<script src="/js/html5shiv.js"></script>
+	<![endif]-->
+    {% block scripts %} {% endblock %}
+</head>
+
+<body id="home">
+	<!-- NavBar-->
+	<nav class="navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">One Shot</a>
+			</div>
+			<div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					<li class="menuItem"><a href="/user/singout">Sing Out</a></li>
+					<li class="menuItem"><a href="/user/{{ app.user.userIdentifier }}/edit">Profile</a></li>
+				{% else %}
+					<li class="menuItem"><a href="/user/singin">Sing In</a></li>
+					<li class="menuItem"><a href="/user/singup">Sing Up</a></li>
+				{% endif %}
+				</ul>
+			</div>
+		</div>
+	</nav> 
+	<div id="content" class="content-section-b" style="border-top: 0">
+
+		<div class="container">
+			<div class="row">
+			{% for message in app.flashes('success') %}
+              <div class="alert alert-success">
+                {{ message }}
+              </div>
+            {% endfor %}
+			<div class="col-md-12">
+				{% block content_title %} {% endblock %}
+			</div>
+            {% block content %} {% endblock %}		
+			</div>
+		</div>
+	</div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+		   
+          </div> <!-- /col-xs-7 -->
+
+          <div class="col-md-5">
+            <div class="footer-banner">
+              <h3 class="footer-title">One Shot</h3>
+              <ul>
+				 <li><a href="/cookies">Política de privacidad</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/jquery-1.9.1.min.js"></script>
+	<script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+	<script src="/js/uploadAdapter.js"></script>
+	<script src="/js/ckeditor.js"></script>	
+	<script src="/js/jquery.oembed.js"></script>
+	<script src="/js/oembed.js"></script>
+	<script src="/js/chosen/chosen.jquery.min.js"></script>
+    <script src="/js/chosen.js"></script>
+	{% block footer_scripts %} {% endblock %}
+</body>
+
 </html>

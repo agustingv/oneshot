@@ -1,0 +1,14 @@
+framework:
+  html_sanitizer:
+    sanitizers:
+      app.post_sanitizer:
+        allow_elements:
+          img: ['src', 'data-uuid']
+          p: '*'
+          strong: '*'
+          figure: '*'
+          oembed: 'url'
+          ul: '*'
+          li: '*'
+          a: ['href', 'rel', 'target']
+          span: ['class', 'data-mention']

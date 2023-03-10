@@ -1,0 +1,27 @@
+{% extends 'oneshot/layouts/layout.two.html.twig' %}
+{% block content_title %}
+  <h2>{% trans %}Add Tag{% endtrans %}</h2>
+{% endblock %}
+{% block layout_content %}
+
+{{ form_start(form) }}
+{% if errors %}
+<div class="c-error">
+  <ul>
+    {% for error in errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+<div class="form-group">
+  <label for="InputName">{{ form_label(form.name) }}</label>
+  <div class="input-group">
+    {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': "Enter name"}}) }}
+  </div>
+</div>
+{{ form_row(form.submit, { 'label': 'Save', attr: {'class': 'btn wow tada btn-embossed btn-primary pull-right animated animated', 'style': 'visibility: visible;'} }) }}
+{{ form_end(form) }}
+
+{% endblock %}
