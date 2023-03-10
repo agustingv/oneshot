@@ -20,6 +20,6 @@
 ###< symfony/phpunit-bridge ###
 #
 /config/oneshot-62f66-743583c79389.json
-/docker-compose.override.yml
-/docker-compose.yml
-/.env
+docker-compose.override.yml
+docker-compose.yml
+.env
