@@ -11,16 +11,27 @@ security:
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+            security: false    
         main:
             provider: 'user_provider'
             stateless: true
             form_login:
                 username_parameter: user_sing_in[mail]
                 password_parameter: user_sing_in[password]
+            logout:
+                invalidate_session: true
+                delete_cookies:
+                    REMEMBERME: { path: null, domain: null}
+                    idToken: { path: null, domain: null}
+                path: /user/singout
+                target: /
             custom_authenticators:
                 - App\Security\LoginAuthenticator
             entry_point: App\Security\LoginAuthenticator
+            remember_me:
+                secret:   '%kernel.secret%' # required
+                lifetime: 604800 # 1 week in seconds
+                always_remember_me: true
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used

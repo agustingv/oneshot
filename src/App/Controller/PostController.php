@@ -14,15 +14,18 @@ use OneShot\Application\Post\Command\CreatedPostCommand;
 use OneShot\Application\Tag\Query\LoadMultipleTagQuery;
 use OneShot\Domain\Post\Post;
 use OneShot\Domain\ValueObjects\EntityId;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class PostController extends AbstractController
 {
     private MessageBusInterface $messageBus;
     private TokenStorageInterface $security;
-    
-    public function __construct(MessageBusInterface $messageBus)
+    private TagAwareCacheInterface $cache;
+
+    public function __construct(MessageBusInterface $messageBus, TagAwareCacheInterface $cache)
     {
       $this->messageBus = $messageBus;
+      $this->cache = $cache;
     }
 
    /**
@@ -84,6 +87,8 @@ class PostController extends AbstractController
                 }
             }
         }
+
+        $this->cache->invalidateTags(['date_lists']);
 
         return new RedirectResponse('/');
     }

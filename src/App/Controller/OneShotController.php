@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use OneShot\Application\Post\Query\ViewPostByDateQuery;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
+use OneShot\Domain\Post\Post;
 
 class OneShotController extends AbstractController
 {
@@ -39,7 +40,13 @@ class OneShotController extends AbstractController
 
       $envelope = $this->messageBus->dispatch($query);
       $handledStamp = $envelope->last(HandledStamp::class);
-      $posts = $handledStamp->getResult();
+      $documents = $handledStamp->getResult();
+      $posts = [];
+      foreach ($documents as $document)
+      {
+          $post = new Post();
+          $posts[] = $post->fromArray($document);
+      }
 
     } catch (\Exception $e) {
       throw new \Exception($e->getMessage());

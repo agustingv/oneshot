@@ -9,6 +9,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 class ViewPostByDateQueryHandler
 {
+
     public function __construct(PostRepository $repository)
     {
         $this->repository = $repository;
@@ -17,7 +18,7 @@ class ViewPostByDateQueryHandler
     public function __invoke(ViewPostByDateQuery $query) : array
     {
         try {
-            return $this->repository->find_pager($query->page, $query->items_page);
+            return  $this->repository->find_pager($query->page, $query->items_page);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }

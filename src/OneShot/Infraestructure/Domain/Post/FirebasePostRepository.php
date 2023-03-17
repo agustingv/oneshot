@@ -65,9 +65,7 @@ class FirebasePostRepository implements PostRepository
         $posts = [];
         foreach ($documents as $document)
         {
-            $data = $document->data();
-            $post = new Post();
-            $posts[] = $post->fromArray($data);
+            $posts[] = $document->data();
         }
         return $posts;
 

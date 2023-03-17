@@ -22,6 +22,7 @@ use OneShot\Domain\User\User;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
 
 class LoginAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface
 {
@@ -58,32 +59,35 @@ class LoginAuthenticator extends AbstractAuthenticator implements Authentication
 
     public function authenticate(Request $request): Passport
     {
-        
         $idToken = $request->cookies->get('idToken');
         if (null !== $idToken) 
         {
-          $verifyQuery = new VerifiedTokenUserQuery(idToken: $idToken);
-          $verifiedIdToken = $this->messageBus->dispatch($verifyQuery);
-          $handledStamp = $verifiedIdToken->last(HandledStamp::class);
-          $verify = $handledStamp->getResult();
-          $user_id = $verify->claims()->get('user_id');
           return new Passport(
-            new UserBadge($user_id, function (string $userIdentifier) {
+            new UserBadge($idToken, function (string $idToken) {
+                $verifyQuery = new VerifiedTokenUserQuery(idToken: $idToken);
+                $verifiedIdToken = $this->messageBus->dispatch($verifyQuery);
+                $handledStamp = $verifiedIdToken->last(HandledStamp::class);
+                $verify = $handledStamp->getResult();
+                $userIdentifier = $verify->claims()->get('user_id');
                 if ($query = new LoadUserQuery($userIdentifier))
                 {
                   $envelope = $this->messageBus->dispatch($query);
                   $handledStamp = $envelope->last(HandledStamp::class);
                   $user = $handledStamp->getResult();
+                  $user->setIdToken($idToken);
                   return $user;
                 }
                 return null;
             }),
             new CustomCredentials(
                 function ($credentials, User $user) {
-                    return true;
+                    return $credentials === $user->getIdToken();
                 },
                 $idToken
-            )
+            ), 
+            [  
+                new RememberMeBadge()
+            ]
             );
         }
         

@@ -131,7 +131,10 @@ class UserController extends AbstractController
     {
       $response = new Response();
       $response->headers->clearCookie('idToken');
+      $response->headers->clearCookie('REMEMBERME');
+
       $response->headers->set("Location","/");
+      $response->send();
       $this->addFlash('success', 'Goodbye!');
       return $response;
     }

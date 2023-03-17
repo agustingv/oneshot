@@ -46,3 +46,15 @@ services:
     OneShot\Domain\Tag\TagRepository:
       class: OneShot\Infraestructure\Domain\Tag\FirebaseTagRepository
       arguments: ['@service_container']   
+
+    Redis:
+      class: Redis
+      calls:
+        - connect:
+          - 'redis'
+          - '6379'
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
+        arguments:
+            - '@Redis'
+            - prefix: oneshot_
+            - ttl: 3600

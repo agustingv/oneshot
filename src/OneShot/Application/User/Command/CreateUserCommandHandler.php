@@ -5,6 +5,7 @@ namespace OneShot\Application\User\Command;
 use OneShot\Application\User\Command\CreateUserCommand;
 use OneShot\Domain\User\User;
 use OneShot\Domain\User\UserRepository;
+use OneShot\Domain\ValueObjects\EntityId;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]

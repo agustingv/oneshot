@@ -108,7 +108,6 @@ class Post extends AbstractDomainModel
 
     public function fromArray(array $data) : self
     {
-        $data['expiredAt'] = ceil(($data['expiredAt'] - time()) / 86400);
         $data = $this->deserialize($data);
         return $this->serializer->denormalize($data, Post::class);
     }

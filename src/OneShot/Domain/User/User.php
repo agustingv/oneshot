@@ -14,9 +14,10 @@ class User extends AbstractDomainModel implements UserInterface
     protected array $roles = [];
     protected string $name;
     protected string $mail;
-    protected string $password;
+    protected string $password = "";
     protected string $userIdentifier = '';
     protected string $type = self::class;
+    protected string $idToken = "";
     protected ?File $image = null;
 
     public function __construct()
@@ -111,6 +112,16 @@ class User extends AbstractDomainModel implements UserInterface
     public function getImage() : File | null
     {
         return $this->image;
+    }
+
+    public function setIdToken(string $token) : void
+    {
+        $this->idToken = $token;
+    }
+
+    public function getIdToken() : string
+    {
+        return $this->idToken;
     }
 
     public function fromArray(array $data) : self

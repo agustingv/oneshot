@@ -51,7 +51,7 @@
 			</div>
 			<div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
-				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				{% if is_granted('IS_AUTHENTICATED_REMEMBERED') or is_granted('IS_AUTHENTICATED_FULLY')%}
 					<li class="menuItem"><a href="/user/singout">Sing Out</a></li>
 					<li class="menuItem"><a href="/user/{{ app.user.userIdentifier }}/edit">Profile</a></li>
 				{% else %}
