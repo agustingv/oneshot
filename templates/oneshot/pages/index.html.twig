@@ -1,0 +1,9 @@
+{% extends 'oneshot/layouts/layout.two.html.twig' %}
+
+{% block layout_content %}
+
+{{ render(controller('App\\Controller\\UserController::userIn')) }}
+
+<div class="articles" id="articles"></div>
+
+{% endblock %}

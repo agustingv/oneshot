@@ -7,13 +7,14 @@ use OneShot\Domain\User\User;
 
 class Post extends AbstractDomainModel
 {
-    public string $body;
-    public int $createdAt;
-    public string $id;
-    public int $expiredAt = 0;
-    public int $points = 100;
-    public ?User $user;
+    protected string $body;
+    protected int $createdAt;
+    protected string $id;
+    protected int $expiredAt = 0;
+    protected int $points = 100;
+    protected ?User $user;
     protected ?array $tags = null;
+    protected string $title = "";
 
     public function __construct() 
     {
@@ -106,6 +107,16 @@ class Post extends AbstractDomainModel
         return $this->tags;
     }
 
+    public function setTitle(string $title) : void
+    {
+        $this->title = $title;
+    }
+
+    public function getTitle() : string
+    {
+        return $this->title;
+    }
+    
     public function fromArray(array $data) : self
     {
         $data = $this->deserialize($data);

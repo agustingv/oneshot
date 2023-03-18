@@ -1,0 +1,13 @@
+{% extends 'oneshot/layouts/layout.two.html.twig' %}
+
+{% block layout_content %}
+
+<h2>#{{ tag.name }}</h2>
+
+<div class="articles">
+  {% for post in posts %}
+    {{ include('oneshot/content/post.html.twig', {'post': post}) }}
+  {% endfor %}
+</div>
+
+{% endblock %}

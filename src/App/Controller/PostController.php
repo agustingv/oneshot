@@ -59,6 +59,7 @@ class PostController extends AbstractController
                 $post->setId(EntityId::generate()->toString());
                 $post->setUser($user);
                 $post->setBody($form->get('body')->getData());
+                $post->setTitle($form->get('title')->getData());
                 $post->setExpiredAt();
                 $post->setCreatedAt(time());
 

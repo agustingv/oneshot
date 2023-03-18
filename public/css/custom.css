@@ -891,3 +891,11 @@ body img {
 	bottom: -100%;
 	left: -100%;
   }
+
+  #post_title {
+	width: 100%;
+  }
+
+  article h3 {
+	margin-top: 0;
+  }

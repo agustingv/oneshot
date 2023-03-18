@@ -23,7 +23,8 @@ class PostType extends AbstractType
     {
         $builder->setAction('single/post');
         $builder->add('uid', HiddenType::class)
-                ->add('body', TextareaType::class, ['sanitizer' => 'app.post_sanitizer', 'attr' => ['maxlength' => 256, 'rows' => 10]])
+                ->add('title', TextType::class, ['attr' => ['maxlength' => 256, 'placeholder' => 'Escribe un título o no']])
+                ->add('body', TextareaType::class, ['sanitizer' => 'app.post_sanitizer', 'attr' => ['minlength' => 50, 'maxlength' => 256, 'rows' => 10]])
                 ->add('tags', ChoiceType::class,['expanded' => false, 'multiple' => true, 'required' => false])
                 ->add('submit', SubmitType::class);
                 

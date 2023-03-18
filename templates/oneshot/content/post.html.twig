@@ -1,12 +1,7 @@
-{% extends 'oneshot/layouts/layout.two.html.twig' %}
-
-{% block layout_content %}
-
-{{ render(controller('App\\Controller\\UserController::userIn')) }}
-
-<div class="articles">
-  {% for post in posts %}
     <article>
+      {% if post.title %}
+        <h3>{{ post.title }}</h3>
+      {% endif %}
       <span class="date">Por <a href="/user/{{ post.user.userIdentifier }}/edit">{{ post.user.name }}, el {{post.createdAt | date("m/d/y")}}</a>
         {% if post.user.image %}
           <div class="container-img-post">
@@ -36,7 +31,6 @@
         </ul>
       </div>
     </article>
-  {% endfor %}
-</div>
-
-{% endblock %}
+    {% if post.id == last.id %} 
+      <span id="pager" data-page="{{last.createdAt}}"></span>
+    {% endif %}

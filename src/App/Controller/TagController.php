@@ -78,7 +78,7 @@ class TagController extends AbstractController
         $handledStamp = $envelope->last(HandledStamp::class);
         $posts = $handledStamp->getResult();
 
-        return $this->render('oneshot/posts.list.tag.html.twig',['posts' => $posts, 'tag' => $tag]);
+        return $this->render('oneshot/pages/tags.html.twig',['posts' => $posts, 'tag' => $tag]);
     }
 
 

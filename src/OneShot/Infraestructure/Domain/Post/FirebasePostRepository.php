@@ -62,6 +62,7 @@ class FirebasePostRepository implements PostRepository
             ->limit($items_page)
             ->startAfter([$page]);
         $documents = $query->documents();
+
         $posts = [];
         foreach ($documents as $document)
         {

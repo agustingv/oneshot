@@ -1,27 +1,40 @@
 $(document).ready(function(){   
-    $(".showmore #loadcontent").on("click", function(event){  
-       event.preventDefault();
-       var $div = $('.articles');
-      
-       $.ajax({  
-          url:        pager_url,  
-          type:       'POST',   
-          data:        {'page': page},
-          dataType:   'html',  
-          
-          success: function(data, status) {  
-            if (data.length > 0)
-            {
-                $div.append($.parseHTML(data, document, true));
-            } 
-            else if (data.length == 0)
-            {
-                $( ".showmore #loadcontent").replaceWith( "<h4>Ooops!. Si puedes leer esto es que has llegado al final de los contenidos de este listado</h4>" );
-            }
-          },  
-          error : function(xhr, textStatus, errorThrown) {  
-             console.log('Ajax request failed.');  
-          }  
-       });  
-    });
+   
+   if ($('#articles').length > 0){
+      PagerLoadContent();
+   }
+
+   $(window).on('scroll', PagerLoadContent);
+
+   function PagerLoadContent()
+   {
+      var position = $(window).scrollTop() + $(window).height();
+      var bottom = $(document).height()-0.50;
+      var $div = $('.articles');
+      var page = 0;
+      if ($('#pager').attr('data-page')) {
+         page = $('#pager').attr('data-page');
+      } 
+      if(position >= bottom) {
+         $.ajax({  
+            url:        '/posts/pager',  
+            type:       'POST',   
+            data:        {'page': page},
+            dataType:   'html',  
+            
+            success: function(data, status) {  
+               $("#pager").remove();
+               if (data.length > 0)
+               {
+                  $div.append($.parseHTML(data, document, true));
+               } else {
+                  $(window).off('scroll', PagerLoadContent);
+               }
+            },  
+            error : function(xhr, textStatus, errorThrown) {  
+               console.log('Ajax request failed.');  
+            }  
+         }); 
+      }
+   }
  });  

@@ -25,34 +25,7 @@ class OneShotController extends AbstractController
    */
   public function index(Request $request) : Response
   {
-    $page = 0;
-    $posts = [];
-    if ($request->isXmlHttpRequest())
-    {
-      $page = $request->get('page');
-    }
-
-    try {
-      $query = new ViewPostByDateQuery(
-          page: $page,
-          items_page: $this->getParameter('app.items_p_page'),
-      );
-
-      $envelope = $this->messageBus->dispatch($query);
-      $handledStamp = $envelope->last(HandledStamp::class);
-      $documents = $handledStamp->getResult();
-      $posts = [];
-      foreach ($documents as $document)
-      {
-          $post = new Post();
-          $posts[] = $post->fromArray($document);
-      }
-
-    } catch (\Exception $e) {
-      throw new \Exception($e->getMessage());
-    }
-
-    return $this->render('oneshot/index.html.twig',['posts' => $posts]);
+      return $this->render('oneshot/pages/index.html.twig');
   }
  
 }
