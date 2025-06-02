@@ -13,14 +13,6 @@
     	<meta name="author" content="">
     	<title>One Shot</title>
     {% endblock %}
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
-    <link href="/css/custom.css" rel="stylesheet">
-	<link href="/css/style.css" rel="stylesheet">
-	<link href="/js/chosen/chosen.min.css" rel="stylesheet">
-    <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.min.css" rel="stylesheet">
 	
 	{% block css %} {% endblock %}
 	<!--[if IE 9]>
@@ -34,6 +26,8 @@
 		<script src="/js/html5shiv.js"></script>
 	<![endif]-->
     {% block scripts %} {% endblock %}
+	<script type="text/javascript" src="{{ asset('build/app.js') }}"></script>
+
 </head>
 
 <body id="home">
@@ -75,7 +69,6 @@
 				{% block content_title %} {% endblock %}
 			</div>
 			<div {{ react_component('MyComponent', { 'fullName': app.user.userIdentifier }) }}></div>
-			<div data-controller="hello"></div>
             {% block content %} {% endblock %}		
 			</div>
 		</div>
@@ -99,18 +92,6 @@
         </div>
       </div>
     </footer>
-
-    <!-- JavaScript -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-	<script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-	<script src="/js/uploadAdapter.js"></script>
-	<script src="/js/ckeditor.js"></script>
-	<script src="/js/jquery.oembed.js"></script>
-	<script src="/js/oembed.js"></script>
-	<script src="/js/chosen/chosen.jquery.min.js"></script>
-    <script src="/js/chosen.js"></script>
-	<script src="js/pager.js"></script>
 	{% block footer_scripts %} {% endblock %}
 </body>
 

@@ -70,6 +70,9 @@ class PostType extends AbstractType
         $resolver->setDefaults([
             'sanitize_html' => true,
             'sanitizer' => 'app.post_sanitizer',
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => 'post_item',
         ]);
     }
     

@@ -28,4 +28,11 @@ class OneShotController extends AbstractController
       return $this->render('oneshot/pages/index.html.twig');
   }
  
+  /**
+   * @Route("/react")
+   */
+  public function react(Request $request) : Response
+  {
+    return $this->render('base2.html.twig');
+  }
 }
